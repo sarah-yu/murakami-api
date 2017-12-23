@@ -17,6 +17,6 @@ app.get('/api/quotes', (req, res) => {
 		.catch(err => console.log(err))
 })
 
-app.listen(process.env.PORT || 3001, () => {
+app.listen(process.env.PORT || 3001, function() {
 	console.log('up and running!')
 })
