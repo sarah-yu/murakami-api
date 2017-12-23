@@ -1,9 +1,12 @@
 const express = require('express')
 const mongoose = require('./db/schema')
+const cors = require('cors')
 
 const Quote = mongoose.model('Quote')
 
 const app = express()
+
+app.use(cors())
 
 app.get('/api/quotes', (req, res) => {
 	Quote.find()
@@ -14,6 +17,6 @@ app.get('/api/quotes', (req, res) => {
 		.catch(err => console.log(err))
 })
 
-app.listen(3001, () => {
-	console.log('app listening on port 3001')
+app.listen(process.env.PORT || 3001, () => {
+	console.log('up and running!')
 })
