@@ -9,10 +9,17 @@ const app = express()
 app.use(cors())
 
 app.get('/api/quotes', (req, res) => {
-	Quote.find()
-		.then(quotes => {
-			let random = Math.floor(Math.random() * quotes.length)
-			res.json(quotes[random])
+	Quote.count()
+		.exec((err, count) => {
+			let random = Math.floor(Math.random() * count)
+
+			Quote.findOne()
+				.skip(random)
+				.exec()
+				.then(quote => {
+					res.json(quote)
+				})
+				.catch(err => console.log(err))
 		})
 		.catch(err => console.log(err))
 })
